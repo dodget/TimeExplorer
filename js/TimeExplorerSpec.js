@@ -175,16 +175,45 @@ describe('Testing the TimeExplorer class', () => {
   it('TimeExplorer.constructDate() constructs a date.', () =>{
     let constructedDate = explorer.constructDate();
     expect(constructedDate).toEqual(null);
-    constructedDate = explorer.constructDate(year=6);
+    constructedDate = explorer.constructDate(6);
     let date = new Date("0006-01-01T00:00");
     expect(constructedDate).toEqual(date);
-    constructedDate = explorer.constructDate(year=-6);
+    constructedDate = explorer.constructDate(-6);
     date = new Date("0000-01-01T00:00");
     date.setFullYear(-6);
     expect(constructedDate).toEqual(date);
-    constructedDate = explorer.constructDate(year=1987);
+    constructedDate = explorer.constructDate(1987);
     date = new Date("1987-01-01T00:00");
     expect(constructedDate).toEqual(date);
+    constructedDate = explorer.constructDate(1987,3,2);
+    date = new Date("1987-04-02T00:00");
+    expect(constructedDate).toEqual(date);
+    constructedDate = explorer.constructDate(1987,3,2,10,20);
+    date = new Date("1987-04-02T10:20");
+    expect(constructedDate).toEqual(date);
+  })
+
+  it('TimeExplorer.get_datetime() should return a date.', () =>{
+    const datum = {
+      'year': "6",
+      'month': "11",
+      'day': "4",
+      'time': "2:30PM"
+    };
+    const constructedDate = explorer.get_datetime(datum,'year','month','day','time', explorer.constructDate);
+    const date = new Date("0006-11-04T14:30");
+    expect(constructedDate).toEqual(date);
+  })
+
+  it('TimeExplorer.get_datetime() should return invalid month.', () =>{
+    const datum = {
+      'year': "6",
+      'month': "John",
+      'day': "4",
+      'time': "2:30PM"
+    };
+    const constructedDate = explorer.get_datetime(datum,'year','month','day','time', explorer.constructDate);
+    expect(constructedDate).toEqual('Invalid month: "John"');
   })
 
 
