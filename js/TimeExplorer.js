@@ -899,16 +899,14 @@ class TimeExplorer {
    */
   set_filters(slug, self) {
     // Set Group filters
-    const groupCheckboxes = $(".Groups input.filter-checkbox");
-    self.filters.activeGroups = Array.prototype.map.call(groupCheckboxes, (box)=> {
-      if (box.checked) {return box.value;}
-    });
+    const groups = $(".Groups input.filter-checkbox");
+    const groupCheckboxes = Array.prototype.filter.call(groups, (box)=> box.checked);
+    self.filters.activeGroups = groupCheckboxes.map( box => box.value );
     // Set Tag filters
-    const tagCheckboxes = $(".Tags input.filter-checkbox");
-    self.filters.activeTags = Array.prototype.map.call(tagCheckboxes, (box)=> {
-      if(box.checked) {return box.value;}
-    });
-
+    const tags = $(".Tags input.filter-checkbox");
+    const tagCheckboxes = Array.prototype.filter.call(tags, (box)=> box.checked);
+    self.filters.activeTags = tagCheckboxes.map( box => box.value );
+    
     if ($("#tag-options").length > 0) {
       if ($("#tag-option-any")[0].checked) {
         self.filters.tagOptions = "any";

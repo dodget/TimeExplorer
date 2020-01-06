@@ -142,8 +142,11 @@ describe('Testing the TimeExplorer class', () => {
   it('TimeExplorer.set_filters() set filters some things checked', ()=> {
     // groups
     group = addTestElement('div', {'class':'Groups'});
+    inp0 = addTestElement('input', {'class':'filter-checkbox', 'value':'NO', 'checked':false});
+    inp0.checked = false;
     inp1 = addTestElement('input', {'class':'filter-checkbox', 'value':'Event', 'checked':true});
     inp2 = addTestElement('input', {'class':'filter-checkbox', 'value':'Thing', 'checked':true});
+    group.appendChild(inp0);
     group.appendChild(inp1);
     group.appendChild(inp2);
 
@@ -151,8 +154,11 @@ describe('Testing the TimeExplorer class', () => {
     tag = addTestElement('div', {'class':'Tags'});
     inp3 = addTestElement('input', {'class':'filter-checkbox', 'value':'TAG', 'checked':true});
     inp4 = addTestElement('input', {'class':'filter-checkbox', 'value':'Another', 'checked':true});
+    inp5 = addTestElement('input', {'class':'filter-checkbox', 'value':'Not', 'checked': false});
+    inp5.checked = false;
     tag.appendChild(inp3);
     tag.appendChild(inp4);
+    tag.appendChild(inp5);
 
     // attach them to the html
     el.appendChild(group);
